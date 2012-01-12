@@ -3,7 +3,7 @@
 require 'net/http'
 require 'uri'
 
-
+API_KEY = "XXXX-XXXXXXXXXX"  # Set your api key here
 class Wolfram
    attr :request
   def initialize(request)
@@ -12,7 +12,7 @@ class Wolfram
 
   def get
      url = URI.parse('http://api.wolframalpha.com/v2/query')
-     params = { :input => @request, :appid => "AWLG3R-74JWT9L5T3", :reinterpret => 'true'}
+     params = { :input => @request, :appid => API_KEY, :reinterpret => 'true'}
      url.query = URI.encode_www_form(params)
      res = Net::HTTP.get_response(url)
      doc = Hpricot(res.body)
