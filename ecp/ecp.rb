@@ -90,14 +90,17 @@ def copy_dir(from, to)
         perr "Destination is a file"
         exit
     end
-    # If dest dir doesen't exist create it
+    # If dest dir doesen't print error
     if !File.exist?(to)
         Dir.mkdir(to)
+    end
+    if !File.exist?(to+"/"+File.basename(from))
+        Dir.mkdir(to+"/"+File.basename(from))
     end
     # Foreach entry, copy it
     Dir.entries(from).each do |f|
         if f != '.' and f !='..'
-            copy(from+"/"+f,to+"/"+f)
+            copy(from+"/"+f,to+"/"+File.basename(from)+"/"+f)
         end
     end
 end
