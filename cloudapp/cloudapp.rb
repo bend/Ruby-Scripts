@@ -6,12 +6,15 @@ require 'rubygems'
 require 'pathname'
 
 CONF = "#{ENV['HOME']}/.cloudapp-conf"
-APPNAME = "cloudapp"
-begin
-    require 'cloudapp_api'
-rescue LoadError
-    puts "You need to install cloudapp_api: run cloud install"
-    exit!(1)
+APPNAME = "cloud"
+
+def load
+    begin
+        require 'cloudapp_api'
+    rescue LoadError
+        puts "You need to install cloudapp_api: run cloud install"
+        exit!(1)
+    end
 end
 
 def authenticate
@@ -161,28 +164,34 @@ else
     when 'install'
         install
     when 'setup'
+        load
         if ARGV.size == 3
             setup(ARGV[1], ARGV[2])
         else
             help
         end
     when 'list'
+        load
         list
     when 'rename'
+        load
         if ARGV.size == 3
             rename(ARGV[1], ARGV[2])
         else 
             help
         end
     when 'delete'
+        load
         if ARGV.size == 2
             delete(ARGV[1])
         end
-    when 'deletebn'
+    when 'deleten'
+        load
         if ARGV.size == 2
             delete_name(name)
         end
     else
+        load
         upload(ARGV[0])
     end
 end
