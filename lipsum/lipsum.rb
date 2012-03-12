@@ -33,15 +33,15 @@ class Lipsum
         doc = Hpricot(res.body)
         doc.search('#lipsum').each do |e|
             # Put in the clipboard
-            IO.popen('pbcopy', 'w').print e.inner_text
+            IO.popen('xclip', 'w').print e.inner_text
         end
     end
 end
 
 begin
-    require 'Hpricot'
+    require 'hpricot'
 rescue LoadError
-    puts "You need to install Hpricot gem "
+    puts "You need to install hpricot gem "
     exit!(1)
 end
 
