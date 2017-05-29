@@ -1,6 +1,6 @@
 ### Installation
 
-This script don't need any library
+This script doesen't need any library
 
 ### Usage
 
